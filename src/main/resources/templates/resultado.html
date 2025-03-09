@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado Assíncrono</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Resultado Assíncrono</h1>
+    
+    <div id="resultado">Carregando...</div>
+
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: '/obterResultado',
+                type: 'GET',
+                success: function(data) {
+                    $('#resultado').text(data);
+                },
+                error: function() {
+                    $('#resultado').text('Erro ao carregar resultado');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
