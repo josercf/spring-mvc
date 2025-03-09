@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Área Segura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Área Segura</h2>
+    
+    <div>
+        <p>Bem-vindo à área segura, <span sec:authentication="name"></span>!</p>
+        <p>Esta página só é visível para usuários autenticados.</p>
+        
+        <div sec:authorize="hasRole('ADMIN')">
+            <h3>Seção do Administrador</h3>
+            <p>Este conteúdo só é visível para administradores.</p>
+        </div>
+    </div>
+    
+    <div>
+        <a th:href="@{/home}">Voltar para Home</a>
+    </div>
+</body>
+</html>
