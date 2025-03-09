@@ -13,6 +13,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fiap.myapp.models.Produto;
 
+
+/*Rotas para teste:
+http://localhost:8080/uri-exemplos/uricomponents
+http://localhost:8080/uri-exemplos/servleturi
+http://localhost:8080/uri-exemplos/produtos (lista de links de produtos)
+http://localhost:8080/uri-exemplos/produtos/1 (detalhes do produto 1)
+*/
+
 @RestController
 @RequestMapping("/uri-exemplos")
 public class UriBuilderController {
