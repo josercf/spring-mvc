@@ -43,22 +43,24 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .csrf(csrf -> csrf.disable())  // Desabilitar CSRF para simplificar o teste - em produção você deve habilitar
             .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/", "/home", "/login").permitAll()
+                .requestMatchers("/", "/home", "/login", "/css/**", "/js/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
+                .loginProcessingUrl("/login")  // URL para processar o formulário de login
                 .defaultSuccessUrl("/home")
                 .failureUrl("/login?error=true")
                 .permitAll()
             )
             .logout(logout -> logout
-                .logoutUrl("/logout")         // Define explicitamente a URL de logout
-                .logoutSuccessUrl("/home")    // Simplificando a URL de sucesso
-                .invalidateHttpSession(true)  // Invalida a sessão
-                .clearAuthentication(true)    // Limpa a autenticação
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/home?logout=true")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
                 .permitAll()
             );
             
